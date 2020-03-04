@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.XueqiMapper">
+  <select id="getAllXueqi" resultType="java.util.Map">
+    select *
+    from xueqi
+    where xueqi_state = 0
+    order by xueqi_id desc
+  </select>
+
+  <insert id="insertXueqi" parameterType="com.taianting.springboot.model.Xueqi">
+    insert into xueqi (xueqi_mingcheng,xueqi_state)
+    value (#{xueqi_mingcheng},0)
+  </insert>
+
+  <update id="deleteSingleXueqi" parameterType="java.lang.Integer">
+    update xueqi
+    set xueqi_state = 1
+    where xueqi_id = #{xueqi_id}
+  </update>
+
+  <update id="updateSingleXueqi" parameterType="com.taianting.springboot.model.Xueqi">
+    update xueqi
+    set xueqi_mingcheng = #{xueqi_mingcheng}
+    where xueqi_id = #{xueqi_id}
+  </update>
+</mapper>
