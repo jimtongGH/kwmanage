@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.dao.KwglMapper">
+  <resultMap id="BaseResultMap" type="com.taianting.springboot.model.Kwgl">
+    <id column="ID" jdbcType="INTEGER" property="ID" />
+    <result column="CODE" jdbcType="VARCHAR" property="CODE" />
+    <result column="XUEQI" jdbcType="VARCHAR" property="XUEQI" />
+    <result column="XUEXIAO" jdbcType="VARCHAR" property="XUEXIAO" />
+    <result column="KEMU" jdbcType="VARCHAR" property="KEMU" />
+    <result column="FUZEJIAOSHI" jdbcType="VARCHAR" property="FUZEJIAOSHI" />
+    <result column="KAOSHI" jdbcType="VARCHAR" property="KAOSHI" />
+    <result column="ZHUANGTAI" jdbcType="VARCHAR" property="ZHUANGTAI" />
+    <result column="SHIJIAN" jdbcType="VARCHAR" property="SHIJIAN" />
+    <result column="RENSHU" jdbcType="VARCHAR" property="RENSHU" />
+    <result column="KAOCHANG" jdbcType="VARCHAR" property="KAOCHANG" />
+    <result column="ZHUGUANTI" jdbcType="VARCHAR" property="ZHUGUANTI" />
+    <result column="DIANZHENBI" jdbcType="VARCHAR" property="DIANZHENBI" />
+    <result column="DATIZHI" jdbcType="VARCHAR" property="DATIZHI" />
+    <result column="KAOCHANGBUSHU" jdbcType="VARCHAR" property="KAOCHANGBUSHU" />
+    <result column="ZHISHIDAGANG" jdbcType="VARCHAR" property="ZHISHIDAGANG" />
+    <result column="TIMU" jdbcType="VARCHAR" property="TIMU" />
+    <result column="SHIJUAN" jdbcType="VARCHAR" property="SHIJUAN" />
+    <result column="KAOSHENGXINXI" jdbcType="VARCHAR" property="KAOSHENGXINXI" />
+    <result column="CANYUJIAOSHI" jdbcType="VARCHAR" property="CANYUJIAOSHI" />
+    <result column="JINDU" jdbcType="VARCHAR" property="JINDU" />
+    <result column="BEIZHU" jdbcType="VARCHAR" property="BEIZHU" />
+    <result column="CHANGCI" jdbcType="VARCHAR" property="CHANGCI" />
+    <result column="BAOMING" jdbcType="VARCHAR" property="BAOMING" />
+  </resultMap>
+
+</mapper>

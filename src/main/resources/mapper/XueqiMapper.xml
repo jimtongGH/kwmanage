@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.dao.XueqiMapper">
+  <resultMap id="BaseResultMap" type="com.taianting.springboot.model.Xueqi">
+    <id column="xueqi_id" jdbcType="INTEGER" property="xueqi_id" />
+    <result column="xueqi_mingcheng" jdbcType="VARCHAR" property="xueqi_mingcheng" />
+  </resultMap>
+
+</mapper>

@@ -1,0 +1,20 @@
+spring:
+  profiles:
+   active: dev
+---
+server:
+  port: 8080
+spring:
+  profiles: prod
+---
+server:
+  port: 8888
+  tomcat:
+    max-http-header-size: 3145728
+spring:
+  profiles: dev
+---
+server:
+  port: 8001
+spring:
+  profiles: test

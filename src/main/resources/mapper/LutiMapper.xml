@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.dao.LutiMapper">
+  <resultMap id="BaseResultMap" type="com.taianting.springboot.model.Luti">
+    <id column="luti_id" jdbcType="INTEGER" property="luti_id" />
+    <result column="pici_id" jdbcType="INTEGER" property="pici_id" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="luti_wenjianming" jdbcType="VARCHAR" property="luti_wenjianming" />
+    <result column="luti_timushuliang" jdbcType="VARCHAR" property="luti_timushuliang" />
+    <result column="luti_jindu" jdbcType="VARCHAR" property="luti_jindu" />
+    <result column="luti_beizhu" jdbcType="VARCHAR" property="luti_beizhu" />
+  </resultMap>
+
+</mapper>

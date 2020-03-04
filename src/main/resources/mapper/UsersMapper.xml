@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.UsersMapper">
+    <select id="findUsersByLUN" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM users WHERE
+        login_username = #{login_username}
+    </select>
+
+    <insert id="addUsers" parameterType="com.taianting.springboot.model.Users">
+        INSERT INTO
+        users (user_name,login_username,login_password)
+        VALUES (#{user_name},#{login_username},#{login_password})
+    </insert>
+</mapper>

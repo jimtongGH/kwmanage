@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.dao.KaowuMapper">
+  <resultMap id="BaseResultMap" type="com.taianting.springboot.model.Kaoshi">
+    <id column="kaowu_id" jdbcType="INTEGER" property="kaowu_id" />
+    <result column="kaowu_code" jdbcType="VARCHAR" property="kaowu_code" />
+    <result column="xueqi_id" jdbcType="INTEGER" property="xueqi_id" />
+    <result column="xuexiao_id" jdbcType="INTEGER" property="xuexiao_id" />
+    <result column="kemu_id" jdbcType="INTEGER" property="kemu_id" />
+    <result column="kaowu_kaoshi" jdbcType="VARCHAR" property="kaowu_kaoshi" />
+    <result column="kaowu_zhuangtai" jdbcType="VARCHAR" property="kaowu_zhuangtai" />
+    <result column="kaowu_shijian" jdbcType="VARCHAR" property="kaowu_shijian" />
+    <result column="kaowu_renshu" jdbcType="VARCHAR" property="kaowu_renshu" />
+    <result column="kaowu_kaochang" jdbcType="VARCHAR" property="kaowu_kaochang" />
+    <result column="kaowu_zhuguanti" jdbcType="VARCHAR" property="kaowu_zhuguanti" />
+    <result column="kaowu_dianzhenbi" jdbcType="VARCHAR" property="kaowu_dianzhenbi" />
+    <result column="kaowu_datizhi" jdbcType="VARCHAR" property="kaowu_datizhi" />
+    <result column="kaowu_kaochangbushu" jdbcType="VARCHAR" property="kaowu_kaochangbushu" />
+    <result column="kaowu_zhishidagang" jdbcType="VARCHAR" property="kaowu_zhishidagang" />
+    <result column="kaowu_timu" jdbcType="VARCHAR" property="kaowu_timu" />
+    <result column="kaowu_shijuan" jdbcType="VARCHAR" property="kaowu_shijuan" />
+    <result column="kaowu_kaoshengxinxi" jdbcType="VARCHAR" property="kaowu_kaoshengxinxi" />
+    <result column="kaowu_canyujiaoshi" jdbcType="VARCHAR" property="kaowu_canyujiaoshi" />
+    <result column="kaowu_jindu" jdbcType="VARCHAR" property="kaowu_jindu" />
+    <result column="kaowu_changci" jdbcType="VARCHAR" property="kaowu_changci" />
+    <result column="kaowu_baoming" jdbcType="VARCHAR" property="kaowu_baoming" />
+    <result column="kaowu_beizhu" jdbcType="VARCHAR" property="kaowu_beizhu" />
+    <result column="jiaoshi_id" jdbcType="INTEGER" property="jiaoshi_id" />
+  </resultMap>
+
+</mapper>
