@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.LutiMapper">
+    <insert id="addLuti" parameterType="com.taianting.springboot.model.Luti">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="luti_id">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into luti (luti_code,xuexiao_id,kemu_id,luti_shuoming,luti_jiezhishijian)
+        values (#{luti_code},#{xuexiao_id},#{kemu_id},#{luti_shuoming},#{luti_jiezhishijian})
+    </insert>
+
+    <select id="getAllLuti" resultType="java.util.Map">
+        select l1.luti_id,l1.luti_code,l1.xuexiao_id,l1.kemu_id,l1.luti_shuoming,l1.luti_jiezhishijian,
+            l2.lutistate_lururenid,l2.lutistate_shenherenid,l2.lutistate_lurubeizhu,l2.lutistate_shenhebeizhu,l2.lutistate_lurustate,l2.lutistate_shenhestate,l2.lutistate_state,
+            x.xuexiao_mingcheng,k.kemu_mingcheng,u.user_name as shenherenname ,u1.user_name as lururenname
+        from luti l1
+            left join lutistate l2 on l1.luti_id = l2.luti_id
+            left join xuexiao x on l1.xuexiao_id = x.xuexiao_id
+            left join kemu k on l1.kemu_id = k.kemu_id
+            left join users u on l2.lutistate_shenherenid = CONVERT(u.user_id USING utf8) COLLATE utf8_unicode_ci
+            left join users u1 on l2.lutistate_lururenid = CONVERT(u1.user_id USING utf8) COLLATE utf8_unicode_ci
+            order by l1.luti_id desc
+    </select>
+
+    <update id="deleteSingleLuti" parameterType="java.lang.Integer">
+       UPDATE lutistate
+       set lutistate_state = 3
+       where luti_id = #{luti_id}
+    </update>
+
+    <select id="getAllLutiByLururenId" parameterType="java.lang.String" resultType="java.util.Map">
+        select l1.luti_id,l1.luti_code,l1.xuexiao_id,l1.kemu_id,l1.luti_shuoming,l1.luti_jiezhishijian,
+            l2.lutistate_lurubeizhu,l2.lutistate_lurustate,l2.lutistate_state,
+            x.xuexiao_mingcheng,k.kemu_mingcheng
+        from luti l1
+            left join lutistate l2 on l1.luti_id = l2.luti_id
+            left join xuexiao x on l1.xuexiao_id = x.xuexiao_id
+            left join kemu k on l1.kemu_id = k.kemu_id
+        where l2.lutistate_lururenid = #{lutistate_lururenid} and l2.lutistate_lurustate = 0 and l2.lutistate_state = 0
+        order by l1.luti_id desc
+    </select>
+
+    <select id="countLurustateByLutiId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT
+        count(*) time
+        FROM
+        lutistate
+        where lutistate_state != 3 and lutistate_lurustate = 0 and luti_id = #{luti_id} and lutistate_lururenid != ''
+    </select>
+
+    <select id="getDoneLutiByLururenId" parameterType="java.lang.String" resultType="java.util.Map">
+        select l1.luti_code,l1.xuexiao_id,l1.kemu_id,l1.luti_shuoming,l1.luti_jiezhishijian,
+            l2.lutistate_lurubeizhu,l2.lutistate_lurustate,l2.lutistate_shenhestate,l2.lutistate_state,
+            x.xuexiao_mingcheng,k.kemu_mingcheng
+        from luti l1
+            left join lutistate l2 on l1.luti_id = l2.luti_id
+            left join xuexiao x on l1.xuexiao_id = x.xuexiao_id
+            left join kemu k on l1.kemu_id = k.kemu_id
+        where l2.lutistate_lururenid = #{lutistate_lururenid} and l2.lutistate_lurustate = 1
+        order by l1.luti_id desc
+    </select>
+
+    <select id="getAllShenheByShenherenId" parameterType="java.lang.String" resultType="java.util.Map">
+        select l1.luti_id,l1.luti_code,l1.xuexiao_id,l1.kemu_id,l1.luti_shuoming,l1.luti_jiezhishijian,
+            l2.lutistate_shenhebeizhu,l2.lutistate_shenhestate,l2.lutistate_state,
+            x.xuexiao_mingcheng,k.kemu_mingcheng
+        from luti l1
+            left join lutistate l2 on l1.luti_id = l2.luti_id
+            left join xuexiao x on l1.xuexiao_id = x.xuexiao_id
+            left join kemu k on l1.kemu_id = k.kemu_id
+        where l2.lutistate_shenherenid = #{lutistate_shenherenid} and l2.lutistate_shenhestate != 2
+        order by l1.luti_id desc
+    </select>
+
+    <select id="countShenhestateByLutiId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT
+        count(*) time
+        FROM
+        lutistate
+        where lutistate_state != 3 and lutistate_shenhestate = 1 and luti_id = #{luti_id} and lutistate_shenherenid != ''
+    </select>
+
+    <select id="getDoneShenheByShenherenId" parameterType="java.lang.String" resultType="java.util.Map">
+        select l1.luti_code,l1.xuexiao_id,l1.kemu_id,l1.luti_shuoming,l1.luti_jiezhishijian,
+            l2.lutistate_shenhebeizhu,l2.lutistate_lurustate,l2.lutistate_shenhestate,l2.lutistate_state,
+            x.xuexiao_mingcheng,k.kemu_mingcheng
+        from luti l1
+            left join lutistate l2 on l1.luti_id = l2.luti_id
+            left join xuexiao x on l1.xuexiao_id = x.xuexiao_id
+            left join kemu k on l1.kemu_id = k.kemu_id
+        where l2.lutistate_shenherenid = #{lutistate_shenherenid} and l2.lutistate_shenhestate = 2
+        order by l1.luti_id desc
+    </select>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.KaoshiMapper">
+    <select id="getAllKaoshiByXueqiId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select k1.kaoshi_id , k1.kaoshi_code , k1.kaoshi_mingcheng , k1.kaoshi_shijian ,
+                k1.kaoshi_canyujiaoshi , k1.kaoshi_xueshengmingdan , k1.kaoshi_renshu ,
+                k1.kaoshi_timu , k1.kaoshi_shijuan ,  k1.kaoshi_dianzhenbi , k1.kaoshi_dianzhenzhi ,
+                k1.kaoshi_baoming , k1.kaoshi_kaochangzhunbei , k1.kaoshi_changci , k1.kaoshi_shezhi ,
+                k1.kaoshi_leixing , k1.kaoshi_beizhu , k1.kaoshi_tixing , k1.kaoshi_zhuangtai , k1.kaoshi_state ,
+                k1.kaoshi_chuangjianren , k1.kaoshi_chuangjianshijian ,k1.kaoshi_xiugairen, k1.kaoshi_xiugaishijian,
+                x1.xuexiao_id , x1.xuexiao_mingcheng ,
+                x2.xueqi_id , x2.xueqi_mingcheng ,
+                j.jiaoshi_id , j.jiaoshi_xingming ,
+                k2.kemu_id , k2.kemu_mingcheng
+        from kaoshi k1
+				left join kemu k2 on k1.kemu_id = k2.kemu_id
+				left join xuexiao x1 on k1.xuexiao_id = x1.xuexiao_id
+				left join xueqi x2 on k1.xueqi_id = x2.xueqi_id
+				left join jiaoshi j on k1.jiaoshi_id = j.jiaoshi_id
+        where k1.xueqi_id = #{xueqi_id}
+        and k1.kaoshi_state = 0
+        order by xueqi_id desc
+    </select>
+    
+    <insert id="insertKaoshi" parameterType="com.taianting.springboot.model.Kaoshi">
+        insert into kaoshi (kaoshi_code,xuexiao_id,kemu_id,xueqi_id,jiaoshi_id,kaoshi_mingcheng,kaoshi_shijian,kaoshi_canyujiaoshi,kaoshi_xueshengmingdan,kaoshi_renshu,kaoshi_timu,kaoshi_shijuan,kaoshi_dianzhenbi,kaoshi_dianzhenzhi,kaoshi_baoming,kaoshi_kaochangzhunbei,kaoshi_changci,kaoshi_shezhi,kaoshi_leixing,kaoshi_beizhu,kaoshi_tixing,kaoshi_zhuangtai,kaoshi_state,kaoshi_chuangjianren,kaoshi_chuangjianshijian)
+        values (#{kaoshi_code},#{xuexiao_id},#{kemu_id},#{xueqi_id},#{jiaoshi_id},#{kaoshi_mingcheng},#{kaoshi_shijian},#{kaoshi_canyujiaoshi},#{kaoshi_xueshengmingdan},#{kaoshi_renshu},#{kaoshi_timu},#{kaoshi_shijuan},#{kaoshi_dianzhenbi},#{kaoshi_dianzhenzhi},#{kaoshi_baoming},#{kaoshi_kaochangzhunbei},#{kaoshi_changci},#{kaoshi_shezhi},#{kaoshi_leixing},#{kaoshi_beizhu},#{kaoshi_tixing},#{kaoshi_zhuangtai},0,#{kaoshi_chuangjianren},#{kaoshi_chuangjianshijian})
+    </insert>
+
+    <update id="deleteSingleKaoshi" parameterType="java.lang.Integer">
+        update kaoshi
+        set kaoshi_state = 1
+        where kaoshi_id = #{kaoshi_id}
+    </update>
+
+    <update id="updateSingleKaoshi" parameterType="com.taianting.springboot.model.Kaoshi">
+        update kaoshi
+        set kaoshi_code = #{kaoshi_code} , kaoshi_mingcheng = #{kaoshi_mingcheng} , kaoshi_shijian = #{kaoshi_shijian} ,
+            kaoshi_canyujiaoshi = #{kaoshi_canyujiaoshi} , kaoshi_xueshengmingdan = #{kaoshi_xueshengmingdan},
+            kaoshi_renshu = #{kaoshi_renshu},kaoshi_timu = #{kaoshi_timu}, kaoshi_shijuan = #{kaoshi_shijuan},
+            kaoshi_dianzhenbi = #{kaoshi_dianzhenbi}, kaoshi_dianzhenzhi = #{kaoshi_dianzhenzhi},kaoshi_baoming = #{kaoshi_baoming},
+            kaoshi_kaochangzhunbei = #{kaoshi_kaochangzhunbei}, kaoshi_changci = #{kaoshi_changci}, kaoshi_shezhi = #{kaoshi_shezhi},
+            kaoshi_leixing = #{kaoshi_leixing}, kaoshi_beizhu = #{kaoshi_beizhu}, kaoshi_tixing = #{kaoshi_tixing},
+            kaoshi_zhuangtai = #{kaoshi_zhuangtai}, kaoshi_xiugairen = #{kaoshi_xiugairen},
+            kaoshi_xiugaishijian = #{kaoshi_xiugaishijian},
+            xuexiao_id = #{xuexiao_id},xueqi_id = #{xueqi_id},jiaoshi_id = #{jiaoshi_id},kemu_id = #{kemu_id}
+        where kaoshi_id = #{kaoshi_id}
+    </update>
+</mapper>

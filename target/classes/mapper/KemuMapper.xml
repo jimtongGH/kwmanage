@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.KemuMapper">
+  <select id="getAllKemu" resultType="java.util.Map">
+    select *
+    from kemu
+    where kemu_state = 0
+    order by kemu_id desc
+  </select>
+
+  <insert id="insertKemu" parameterType="com.taianting.springboot.model.Kemu">
+    insert into kemu (kemu_mingcheng,kemu_state)
+    value (#{kemu_mingcheng},0)
+  </insert>
+
+  <update id="deleteSingleKemu" parameterType="java.lang.Integer">
+    update kemu
+    set kemu_state = 1
+    where kemu_id = #{kemu_id}
+  </update>
+
+  <update id="updateSingleKemu" parameterType="com.taianting.springboot.model.Kemu">
+    update kemu
+    set kemu_mingcheng = #{kemu_mingcheng}
+    where kemu_id = #{kemu_id}
+  </update>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.UsersMapper">
+    <select id="findUsersByLUN" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from users
+        where login_username = #{login_username}
+    </select>
+
+    <select id="findUsersByUserId" parameterType="String" resultType="java.util.Map">
+        select * from users
+        where user_id = #{user_id}
+    </select>
+    
+    <select id="findUserIdAndName" resultType="java.util.Map">
+        select user_id,user_name
+        from users
+        where user_level = 1 and user_state = 0
+    </select>
+
+    <insert id="addUsers" parameterType="com.taianting.springboot.model.Users">
+        insert into users (user_id,user_name,user_sex,user_level,login_username,login_password,user_salt,user_state)
+        values (#{user_id},#{user_name},0,0,#{login_username},#{login_password},#{user_salt},0)
+    </insert>
+
+    <update id="updateUsersInfo" parameterType="com.taianting.springboot.model.Users">
+        update users
+        set user_name = #{user_name},user_sex = #{user_sex}
+        where user_id = #{user_id}
+    </update>
+
+    <update id="updateUsersPassword" parameterType="com.taianting.springboot.model.Users">
+        update users
+        set login_password = #{login_password} ,user_salt = #{user_salt}, user_state = #{user_state}
+        where user_id = #{user_id}
+    </update>
+
+    <select id="getSignupUser" resultType="java.util.Map">
+        select user_id, user_name, login_username
+        from users
+        where user_level = 0
+    </select>
+
+    <update id="updateSignupUser" parameterType="java.lang.String">
+        update  users
+        set user_level = 1
+        where user_id = #{user_id}
+    </update>
+
+    <select id="getYonghu" resultType="java.util.Map">
+        select user_name,user_id,user_level,login_username,user_state
+        from users
+        where user_level != 2
+    </select>
+
+    <update id="updateUserState" parameterType="com.taianting.springboot.model.Users">
+        update users
+        set user_state = #{user_state}
+        where user_id = #{user_id}
+    </update>
+
+    <update id="deleteUser" parameterType="java.lang.String">
+        update users
+        set user_state = 2
+        where user_id = #{user_id}
+    </update>
+</mapper>
