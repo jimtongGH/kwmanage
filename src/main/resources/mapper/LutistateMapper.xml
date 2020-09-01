@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.LutistateMapper">
+    <insert id="addLururen" parameterType="com.taianting.springboot.model.Lutistate">
+        insert into lutistate (luti_id,lutistate_lururenid,lutistate_lurubeizhu,lutistate_lurustate,lutistate_shenhestate,lutistate_state)
+        values (#{luti_id},#{lutistate_lururenid},#{lutistate_lurubeizhu},#{lutistate_lurustate},#{lutistate_shenhestate},#{lutistate_state})
+    </insert>
+
+    <insert id="addShenheren" parameterType="com.taianting.springboot.model.Lutistate">
+        insert into lutistate (luti_id,lutistate_shenherenid,lutistate_lurubeizhu,lutistate_shenhebeizhu,lutistate_lurustate,lutistate_shenhestate,lutistate_state)
+        values (#{luti_id},#{lutistate_shenherenid},#{lutistate_lurubeizhu},#{lutistate_shenhebeizhu},#{lutistate_lurustate},#{lutistate_shenhestate},#{lutistate_state})
+    </insert>
+
+    <update id="updateLurustateByLutiIdAndLururenId" parameterType="com.taianting.springboot.model.Lutistate">
+        update lutistate
+        set lutistate_lurustate = 1
+        where luti_id = #{luti_id} and lutistate_lururenid = #{lutistate_lururenid}
+    </update>
+
+    <update id="updateShenhestate" parameterType="java.lang.Integer">
+        update lutistate
+        set lutistate_shenhestate = 1
+        where luti_id = #{luti_id} and lutistate_shenherenid != ''
+    </update>
+
+    <update id="updateStateAsShenhezhong" parameterType="java.lang.Integer">
+        update lutistate
+        set lutistate_state = 1
+        where luti_id = #{luti_id}
+    </update>
+
+    <update id="updateShenhestateByLutiIdAndShenherenId" parameterType="com.taianting.springboot.model.Lutistate">
+        update lutistate
+        set lutistate_shenhestate = 2
+        where luti_id = #{luti_id} and lutistate_shenherenid = #{lutistate_shenherenid}
+    </update>
+
+    <update id="updateState" parameterType="java.lang.Integer">
+        update lutistate
+        set lutistate_state = 2
+        where luti_id = #{luti_id}
+    </update>
+</mapper>

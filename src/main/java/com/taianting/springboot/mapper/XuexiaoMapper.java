@@ -1,6 +1,7 @@
 package com.taianting.springboot.mapper;
 
 import com.taianting.springboot.model.Xuexiao;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
+@Mapper
 public interface XuexiaoMapper {
     //查找所有的学校
     List<Map<String ,String>> getAllXuexiao();

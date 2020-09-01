@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taianting.springboot.mapper.NetdiskMapper">
+    <insert id="addFile" parameterType="com.taianting.springboot.model.Netdisk">
+        insert into netdisk(netdisk_time,netdisk_name,netdisk_size,netdisk_url,netdisk_lujing,netdisk_icon,netdisk_state,user_id,netdisk_uploaduser)
+        values (#{netdisk_time},#{netdisk_name},#{netdisk_size},#{netdisk_url},#{netdisk_lujing},#{netdisk_icon},0,#{user_id},#{netdisk_uploaduser})
+    </insert>
+
+    <select id="getAllFile" resultType="java.util.Map">
+        select *
+        from netdisk
+        where netdisk_state = 0
+        order by netdisk_time desc
+    </select>
+
+    <select id="getAllFileByUserId" parameterType="java.lang.String" resultType="java.util.Map">
+        select *
+        from netdisk
+        where user_id=#{user_id} and netdisk_state in (0,2)
+        order by netdisk_time desc
+    </select>
+
+    <select id="getRecoverFileByUserId" parameterType="java.lang.String" resultType="java.util.Map">
+        select *
+        from netdisk
+        where user_id=#{user_id} and netdisk_state = 1
+        order by netdisk_time desc
+    </select>
+
+    <update id="deleteByNetdiskId" parameterType="java.lang.Integer">
+        update netdisk
+        set netdisk_state = 1
+        where netdisk_id = #{netdisk_id}
+    </update>
+
+    <update id="deleteForeverByNetdiskId" parameterType="java.lang.Integer">
+        update netdisk
+        set netdisk_state = 3
+        where netdisk_id = #{netdisk_id}
+    </update>
+
+    <update id="recoverFile" parameterType="java.lang.Integer">
+        update netdisk
+        set netdisk_state = 2
+        where netdisk_id = #{netdisk_id}
+    </update>
+    
+    <update id="updateSingleFile" parameterType="com.taianting.springboot.model.Netdisk">
+        update netdisk
+        set netdisk_name = #{netdisk_name}, netdisk_icon = #{netdisk_icon}, netdisk_state = #{netdisk_state}
+        where netdisk_id = #{netdisk_id}
+    </update>
+</mapper>

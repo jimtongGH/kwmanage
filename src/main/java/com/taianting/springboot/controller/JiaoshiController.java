@@ -1,12 +1,10 @@
 package com.taianting.springboot.controller;
 
 import com.taianting.springboot.model.Jiaoshi;
-import com.taianting.springboot.model.Xuexiao;
 import com.taianting.springboot.service.JiaoshiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +20,9 @@ public class JiaoshiController {
 
     //查找所有的教师
     @CrossOrigin
-    @GetMapping(value = "api/manage/jiaoshi/getAll")
+    @GetMapping(value = "/manage/jiaoshi/getAll")
     @ResponseBody
-    public Map<String, Object> getAllJiaoshi(HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> getAllJiaoshi() throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         List<Map<String,String>> jiaoshi = jiaoshiService.getAllJiaoshi();
         if(jiaoshi == null){
@@ -40,12 +37,32 @@ public class JiaoshiController {
         return resultMap;
     }
 
+    //通过学校ID找教师姓名
+    @CrossOrigin
+    @GetMapping(value = "/manage/jiaoshi/getJiaoshiXingmingByXuexiaoId")
+    @ResponseBody
+    public Map<String, Object> getJiaoshiXingmingByXuexiaoId(Jiaoshi jiaoshi) throws Exception {
+        Map<String, Object> resultMap = new HashMap<>();
+        int xuexiao_id =jiaoshi.getXuexiao_id();
+        System.out.println(xuexiao_id);
+        List<Map<String,String>> jiaoshiXingming = jiaoshiService.getJiaoshiXingmingByXuexiaoId(xuexiao_id);
+        if(jiaoshiXingming == null){
+            resultMap.put("code",201);
+            resultMap.put("msg","没有教师信息");
+        } else {
+            resultMap.put("code", 200);
+            resultMap.put("msg", "查找成功");
+            resultMap.put("result", jiaoshiXingming);
+        }
+        System.out.println("resultMap:"+resultMap);
+        return resultMap;
+    }
+
     //增加教师
     @CrossOrigin
-    @RequestMapping(value = "api/manage/jiaoshi/insertJiaoshi")
+    @RequestMapping(value = "/manage/jiaoshi/insertJiaoshi")
     @ResponseBody
-    public Map<String, Object> insertJiaoshi(Jiaoshi jiaoshi,HttpServletResponse response){
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> insertJiaoshi(Jiaoshi jiaoshi) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         Integer xuexiao_id = jiaoshi.getXuexiao_id();
         String jiaoshi_xingming = jiaoshi.getJiaoshi_xingming();
@@ -66,10 +83,9 @@ public class JiaoshiController {
 
     //软删除单条记录
     @CrossOrigin
-    @RequestMapping(value = "api/manage/jiaoshi/deleteSingleJiaoshi")
+    @RequestMapping(value = "/manage/jiaoshi/deleteSingleJiaoshi")
     @ResponseBody
-    public Map<String, Object> deleteSingleJiaoshi (Jiaoshi jiaoshi, HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> deleteSingleJiaoshi (Jiaoshi jiaoshi) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         int jiaoshi_id = jiaoshi.getJiaoshi_id();
         int flag = jiaoshiService.deleteSingleJiaoshi(jiaoshi_id);
@@ -87,15 +103,15 @@ public class JiaoshiController {
 
     //更改单条记录
     @CrossOrigin
-    @RequestMapping(value = "api/manage/jiaoshi/updateSingleJiaoshi")
+    @RequestMapping(value = "/manage/jiaoshi/updateSingleJiaoshi")
     @ResponseBody
-    public Map<String, Object> updateSingleJiaoshi (Jiaoshi jiaoshi, HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> updateSingleJiaoshi (Jiaoshi jiaoshi) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         int jiaoshi_id = jiaoshi.getJiaoshi_id();
+        int xuexiao_id = jiaoshi.getXuexiao_id();
         String jiaoshi_xingming = jiaoshi.getJiaoshi_xingming();
         String jiaoshi_shoujihaoma = jiaoshi.getJiaoshi_shoujihaoma();
-        Jiaoshi jiaoshi1 = new Jiaoshi(jiaoshi_id, jiaoshi_xingming, jiaoshi_shoujihaoma);
+        Jiaoshi jiaoshi1 = new Jiaoshi(jiaoshi_id, xuexiao_id, jiaoshi_xingming, jiaoshi_shoujihaoma);
         System.out.println(jiaoshi1);
         int flag = jiaoshiService.updateSingleJiaoshi(jiaoshi1);
         if(flag != -1){

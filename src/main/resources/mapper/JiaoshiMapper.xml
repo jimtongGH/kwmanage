@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.taianting.springboot.mapper.JiaoshiMapper">
-  <resultMap id="BaseResultMap" type="com.taianting.springboot.model.Jiaoshi">
-    <id column="jiaoshi_id" jdbcType="INTEGER" property="jiaoshi_id" />
-    <result column="jiaoshi_xingming" jdbcType="VARCHAR" property="jiaoshi_xingming" />
-    <result column="jiaoshi_shoujihaoma" jdbcType="VARCHAR" property="jiaoshi_shoujihaoma" />
-    <result column="xuexiao_id" jdbcType="INTEGER" property="xuexiao_id" />
-  </resultMap>
-  <select id="getAllJiaoshi" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT * FROM jiaoshi
-    </select>
+  <select id="getAllJiaoshi" resultType="java.util.Map">
+    select j.jiaoshi_id,j.jiaoshi_xingming,j.jiaoshi_shoujihaoma,x.xuexiao_id,x.xuexiao_mingcheng
+    from jiaoshi j,xuexiao x
+    where j.jiaoshi_state = 0 and j.xuexiao_id=x.xuexiao_id
+    order by jiaoshi_id desc
+  </select>
+
+  <select id="getJiaoshiXingmingByXuexiaoId" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select jiaoshi_id,jiaoshi_xingming
+    from jiaoshi
+    where jiaoshi_state = 0 and xuexiao_id = #{xuexiao_id}
+  </select>
+
+  <insert id="insertJiaoshi" parameterType="com.taianting.springboot.model.Jiaoshi">
+    insert into jiaoshi (jiaoshi_xingming,jiaoshi_shoujihaoma,xuexiao_id,jiaoshi_state)
+    values (#{jiaoshi_xingming},#{jiaoshi_shoujihaoma},#{xuexiao_id},0)
+  </insert>
+
+  <update id="deleteSingleJiaoshi" parameterType="java.lang.Integer">
+    update jiaoshi
+    set jiaoshi_state = 1
+    where jiaoshi_id = #{jiaoshi_id}
+  </update>
+
+  <update id="updateSingleJiaoshi" parameterType="com.taianting.springboot.model.Jiaoshi">
+    update jiaoshi
+    set xuexiao_id = #{xuexiao_id}, jiaoshi_xingming = #{jiaoshi_xingming} , jiaoshi_shoujihaoma = #{jiaoshi_shoujihaoma}
+    where jiaoshi_id = #{jiaoshi_id}
+  </update>
 </mapper>

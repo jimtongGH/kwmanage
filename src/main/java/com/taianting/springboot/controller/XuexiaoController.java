@@ -5,7 +5,6 @@ import com.taianting.springboot.service.XuexiaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,9 @@ public class XuexiaoController {
 
     //查找所有的学校
     @CrossOrigin
-    @GetMapping(value = "api/manage/xuexiao/getAll")
+    @GetMapping(value = "/manage/xuexiao/getAll")
     @ResponseBody
-    public Map<String, Object> getAllXuexiao (HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> getAllXuexiao () throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         List<Map<String ,String>> xuexiao = xuexiaoService.getAllXuexiao();
         if(xuexiao == null){
@@ -37,10 +35,9 @@ public class XuexiaoController {
 
     //新增学校
     @CrossOrigin
-    @RequestMapping(value = "api/manage/xuexiao/insertXuexiao")
+    @RequestMapping(value = "/manage/xuexiao/insertXuexiao")
     @ResponseBody
-    public Map<String, Object> insertXuexiao (Xuexiao xuexiao, HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> insertXuexiao (Xuexiao xuexiao) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         String xuexiao_mingcheng = xuexiao.getXuexiao_mingcheng();
         Xuexiao xuexiao1 = new Xuexiao(xuexiao_mingcheng);
@@ -59,10 +56,9 @@ public class XuexiaoController {
 
     //软删除单条记录
     @CrossOrigin
-    @RequestMapping(value = "api/manage/xuexiao/deleteSingleXuexiao")
+    @RequestMapping(value = "/manage/xuexiao/deleteSingleXuexiao")
     @ResponseBody
-    public Map<String, Object> deleteSingleXuexiao (Xuexiao xuexiao, HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> deleteSingleXuexiao (Xuexiao xuexiao) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         int xuexiao_id = xuexiao.getXuexiao_id();
         int flag = xuexiaoService.deleteSingleXuexiao(xuexiao_id);
@@ -80,10 +76,9 @@ public class XuexiaoController {
 
     //更改单条记录
     @CrossOrigin
-    @RequestMapping(value = "api/manage/xuexiao/updateSingleXuexiao")
+    @RequestMapping(value = "/manage/xuexiao/updateSingleXuexiao")
     @ResponseBody
-    public Map<String, Object> updateSingleXuexiao (Xuexiao xuexiao,HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> updateSingleXuexiao (Xuexiao xuexiao) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         int xuexiao_id = xuexiao.getXuexiao_id();
         String xuexiao_mingcheng = xuexiao.getXuexiao_mingcheng();

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -13,7 +15,9 @@ import java.io.Serializable;
 @Data
 @Log
 @Component
+@Entity
 public class Kemu implements Serializable {
+    @Id
     private Integer kemu_id;
     private String kemu_mingcheng;
     private Integer kemu_state;
@@ -25,7 +29,8 @@ public class Kemu implements Serializable {
         this.kemu_mingcheng = kemu_mingcheng;
     }
 
-    public Kemu(int kemu_id,String kemu_mingcheng) {
+    public Kemu(int kemu_id,
+                String kemu_mingcheng) {
         this.kemu_id = kemu_id;
         this.kemu_mingcheng = kemu_mingcheng;
     }

@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.minIdle",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.minIdle."
+    },
+    {
+      "name": "file.path",
+      "type": "java.lang.String",
+      "description": "Description for file.path."
+    },
+    {
+      "name": "file.address",
+      "type": "java.lang.String",
+      "description": "Description for file.address."
+    }
+  ] }

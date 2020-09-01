@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.taianting.springboot.dao.XuexiaoMapper">
-  <resultMap id="BaseResultMap" type="com.taianting.springboot.model.Xuexiao">
-    <id column="xuexiaoId" jdbcType="INTEGER" property="xuexiaoId" />
-    <result column="xuexiaoName" jdbcType="VARCHAR" property="xuexiaoName" />
-  </resultMap>
+<mapper namespace="com.taianting.springboot.mapper.XuexiaoMapper">
+  <select id="getAllXuexiao" resultType="java.util.Map">
+    select *
+    from xuexiao
+    where xuexiao_state = 0
+    order by xuexiao_id desc
+  </select>
+
+  <insert id="insertXuexiao" parameterType="com.taianting.springboot.model.Xuexiao">
+    insert into xuexiao (xuexiao_mingcheng,xuexiao_state)
+    value (#{xuexiao_mingcheng},0)
+  </insert>
+
+  <update id="deleteSingleXuexiao" parameterType="java.lang.Integer">
+    update xuexiao
+    set xuexiao_state = 1
+    where xuexiao_id = #{xuexiao_id}
+  </update>
+
+  <update id="updateSingleXuexiao" parameterType="com.taianting.springboot.model.Xuexiao">
+    update xuexiao
+    set xuexiao_mingcheng = #{xuexiao_mingcheng}
+    where xuexiao_id = #{xuexiao_id}
+  </update>
 </mapper>

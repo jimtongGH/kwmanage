@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -13,58 +15,147 @@ import java.io.Serializable;
 @Data
 @Log
 @Component
+@Entity
 public class Kaoshi implements Serializable {
-    private Integer kaowu_id;
-    private String kaowu_code;
+    @Id
+    private Integer kaoshi_id;
+    private String kaoshi_code;
     private Integer xueqi_id;
     private Integer xuexiao_id;
     private Integer kemu_id;
-    private String kaowu_kaoshi;
-    private String kaowu_zhuangtai;
-    private String kaowu_shijian;
-    private String kaowu_renshu;
-    private String kaowu_kaochang;
-    private String kaowu_zhuguanti;
-    private String kaowu_dianzhenbi;
-    private String kaowu_datizhi;
-    private String kaowu_kaochangbushu;
-    private String kaowu_zhishidagang;
-    private String kaowu_timu;
-    private String kaowu_shijuan;
-    private String kaowu_kaoshengxinxi;
-    private String kaowu_canyujiaoshi;
-    private String kaowu_jindu;
-    private String kaowu_changci;
-    private String kaowu_baoming;
-    private String kaowu_beizhu;
     private Integer jiaoshi_id;
+    private String kaoshi_mingcheng;
+    private String kaoshi_shijian;
+    private String kaoshi_canyujiaoshi;
+    private String kaoshi_xueshengmingdan;
+    private String kaoshi_renshu;
+    private String kaoshi_timu;
+    private String kaoshi_shijuan;
+    private String kaoshi_dianzhenbi;
+    private String kaoshi_dianzhenzhi;
+    private String kaoshi_baoming;
+    private String kaoshi_kaochangzhunbei;
+    private String kaoshi_changci;
+    private String kaoshi_shezhi;
+    private String kaoshi_leixing;
+    private String kaoshi_beizhu;
+    private String kaoshi_tixing;
+    //状态
+    //（灰色）未开始0、已取消-10、已终止-20
+    //（绿色）筹备中10、正在报名20、已发布30
+    //（红色）正在考试100、阅卷中110、成绩发布120
+    //（黑色）已完成200
+    private Integer kaoshi_zhuangtai;
+    private Integer kaoshi_state;
+    private String kaoshi_chuangjianren;
+    private String kaoshi_chuangjianshijian;
+    private String kaoshi_xiugairen;
+    private String kaoshi_xiugaishijian;
 
     public Kaoshi() {
     }
 
-    public Kaoshi(String kaowu_code, Integer xueqi_id, Integer xuexiao_id, Integer kemu_id, String kaowu_kaoshi, String kaowu_zhuangtai, String kaowu_shijian, String kaowu_renshu, String kaowu_kaochang, String kaowu_zhuguanti, String kaowu_dianzhenbi, String kaowu_datizhi, String kaowu_kaochangbushu, String kaowu_zhishidagang, String kaowu_timu, String kaowu_shijuan, String kaowu_kaoshengxinxi, String kaowu_canyujiaoshi, String kaowu_jindu, String kaowu_changci, String kaowu_baoming, String kaowu_beizhu, Integer jiaoshi_id) {
-        this.kaowu_code = kaowu_code;
+    //新增
+    public Kaoshi(String kaoshi_code,
+                  Integer xueqi_id,
+                  Integer xuexiao_id,
+                  Integer kemu_id,
+                  Integer jiaoshi_id,
+                  String kaoshi_mingcheng,
+                  String kaoshi_shijian,
+                  String kaoshi_canyujiaoshi,
+                  String kaoshi_xueshengmingdan,
+                  String kaoshi_renshu,
+                  String kaoshi_timu,
+                  String kaoshi_shijuan,
+                  String kaoshi_dianzhenbi,
+                  String kaoshi_dianzhenzhi,
+                  String kaoshi_baoming,
+                  String kaoshi_kaochangzhunbei,
+                  String kaoshi_changci,
+                  String kaoshi_shezhi,
+                  String kaoshi_leixing,
+                  String kaoshi_beizhu,
+                  String kaoshi_tixing,
+                  Integer kaoshi_zhuangtai,
+                  String kaoshi_chuangjianren,
+                  String kaoshi_chuangjianshijian) {
+        this.kaoshi_code = kaoshi_code;
         this.xueqi_id = xueqi_id;
         this.xuexiao_id = xuexiao_id;
         this.kemu_id = kemu_id;
-        this.kaowu_kaoshi = kaowu_kaoshi;
-        this.kaowu_zhuangtai = kaowu_zhuangtai;
-        this.kaowu_shijian = kaowu_shijian;
-        this.kaowu_renshu = kaowu_renshu;
-        this.kaowu_kaochang = kaowu_kaochang;
-        this.kaowu_zhuguanti = kaowu_zhuguanti;
-        this.kaowu_dianzhenbi = kaowu_dianzhenbi;
-        this.kaowu_datizhi = kaowu_datizhi;
-        this.kaowu_kaochangbushu = kaowu_kaochangbushu;
-        this.kaowu_zhishidagang = kaowu_zhishidagang;
-        this.kaowu_timu = kaowu_timu;
-        this.kaowu_shijuan = kaowu_shijuan;
-        this.kaowu_kaoshengxinxi = kaowu_kaoshengxinxi;
-        this.kaowu_canyujiaoshi = kaowu_canyujiaoshi;
-        this.kaowu_jindu = kaowu_jindu;
-        this.kaowu_changci = kaowu_changci;
-        this.kaowu_baoming = kaowu_baoming;
-        this.kaowu_beizhu = kaowu_beizhu;
         this.jiaoshi_id = jiaoshi_id;
+        this.kaoshi_mingcheng = kaoshi_mingcheng;
+        this.kaoshi_shijian = kaoshi_shijian;
+        this.kaoshi_canyujiaoshi = kaoshi_canyujiaoshi;
+        this.kaoshi_xueshengmingdan = kaoshi_xueshengmingdan;
+        this.kaoshi_renshu = kaoshi_renshu;
+        this.kaoshi_timu = kaoshi_timu;
+        this.kaoshi_shijuan = kaoshi_shijuan;
+        this.kaoshi_dianzhenbi = kaoshi_dianzhenbi;
+        this.kaoshi_dianzhenzhi = kaoshi_dianzhenzhi;
+        this.kaoshi_baoming = kaoshi_baoming;
+        this.kaoshi_kaochangzhunbei = kaoshi_kaochangzhunbei;
+        this.kaoshi_changci = kaoshi_changci;
+        this.kaoshi_shezhi = kaoshi_shezhi;
+        this.kaoshi_leixing = kaoshi_leixing;
+        this.kaoshi_beizhu = kaoshi_beizhu;
+        this.kaoshi_tixing = kaoshi_tixing;
+        this.kaoshi_zhuangtai = kaoshi_zhuangtai;
+        this.kaoshi_chuangjianren = kaoshi_chuangjianren;
+        this.kaoshi_chuangjianshijian = kaoshi_chuangjianshijian;
+    }
+
+    //修改
+    public Kaoshi(Integer kaoshi_id,
+                  String kaoshi_code,
+                  Integer xueqi_id,
+                  Integer xuexiao_id,
+                  Integer kemu_id,
+                  Integer jiaoshi_id,
+                  String kaoshi_mingcheng,
+                  String kaoshi_shijian,
+                  String kaoshi_canyujiaoshi,
+                  String kaoshi_xueshengmingdan,
+                  String kaoshi_renshu,
+                  String kaoshi_timu,
+                  String kaoshi_shijuan,
+                  String kaoshi_dianzhenbi,
+                  String kaoshi_dianzhenzhi,
+                  String kaoshi_baoming,
+                  String kaoshi_kaochangzhunbei,
+                  String kaoshi_changci,
+                  String kaoshi_shezhi,
+                  String kaoshi_leixing,
+                  String kaoshi_beizhu,
+                  String kaoshi_tixing,
+                  Integer kaoshi_zhuangtai,
+                  String kaoshi_xiugairen,
+                  String kaoshi_xiugaishijian) {
+        this.kaoshi_id = kaoshi_id;
+        this.kaoshi_code = kaoshi_code;
+        this.xueqi_id = xueqi_id;
+        this.xuexiao_id = xuexiao_id;
+        this.kemu_id = kemu_id;
+        this.jiaoshi_id = jiaoshi_id;
+        this.kaoshi_mingcheng = kaoshi_mingcheng;
+        this.kaoshi_shijian = kaoshi_shijian;
+        this.kaoshi_canyujiaoshi = kaoshi_canyujiaoshi;
+        this.kaoshi_xueshengmingdan = kaoshi_xueshengmingdan;
+        this.kaoshi_renshu = kaoshi_renshu;
+        this.kaoshi_timu = kaoshi_timu;
+        this.kaoshi_shijuan = kaoshi_shijuan;
+        this.kaoshi_dianzhenbi = kaoshi_dianzhenbi;
+        this.kaoshi_dianzhenzhi = kaoshi_dianzhenzhi;
+        this.kaoshi_baoming = kaoshi_baoming;
+        this.kaoshi_kaochangzhunbei = kaoshi_kaochangzhunbei;
+        this.kaoshi_changci = kaoshi_changci;
+        this.kaoshi_shezhi = kaoshi_shezhi;
+        this.kaoshi_leixing = kaoshi_leixing;
+        this.kaoshi_beizhu = kaoshi_beizhu;
+        this.kaoshi_tixing = kaoshi_tixing;
+        this.kaoshi_zhuangtai = kaoshi_zhuangtai;
+        this.kaoshi_xiugairen = kaoshi_xiugairen;
+        this.kaoshi_xiugaishijian = kaoshi_xiugaishijian;
     }
 }

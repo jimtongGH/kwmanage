@@ -5,7 +5,6 @@ import com.taianting.springboot.service.KemuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +17,9 @@ public class KemuController {
 
     //查找所有的科目
     @CrossOrigin
-    @GetMapping(value = "api/manage/kemu/getAll")
+    @GetMapping(value = "/manage/kemu/getAll")
     @ResponseBody
-    public Map<String, Object> getAllKemu (HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> getAllKemu () throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         List<Map<String ,String>> kemu = kemuService.getAllKemu();
         if(kemu == null){
@@ -38,10 +36,9 @@ public class KemuController {
 
     //新增科目
     @CrossOrigin
-    @RequestMapping(value = "api/manage/kemu/insertKemu")
+    @RequestMapping(value = "/manage/kemu/insertKemu")
     @ResponseBody
-    public Map<String, Object> insertkemu (Kemu kemu, HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> insertkemu (Kemu kemu) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         String kemu_mingcheng = kemu.getKemu_mingcheng();
         Kemu kemu1 = new Kemu(kemu_mingcheng);
@@ -60,10 +57,9 @@ public class KemuController {
 
     //软删除单条记录
     @CrossOrigin
-    @RequestMapping(value = "api/manage/kemu/deleteSingleKemu")
+    @RequestMapping(value = "/manage/kemu/deleteSingleKemu")
     @ResponseBody
-    public Map<String, Object> deleteSinglekemu (Kemu kemu,HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> deleteSinglekemu (Kemu kemu) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         int kemu_id = kemu.getKemu_id();
         int flag = kemuService.deleteSingleKemu(kemu_id);
@@ -81,10 +77,9 @@ public class KemuController {
 
     //更改单条记录
     @CrossOrigin
-    @RequestMapping(value = "api/manage/kemu/updateSingleKemu")
+    @RequestMapping(value = "/manage/kemu/updateSingleKemu")
     @ResponseBody
-    public Map<String, Object> updateSinglekemu (Kemu kemu,HttpServletResponse response) throws Exception {
-        response.setHeader("Access-Control-Allow-Origin","*");
+    public Map<String, Object> updateSinglekemu (Kemu kemu) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
         int kemu_id = kemu.getKemu_id();
         String kemu_mingcheng = kemu.getKemu_mingcheng();

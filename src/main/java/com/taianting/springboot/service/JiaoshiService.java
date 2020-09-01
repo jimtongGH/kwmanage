@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public interface JiaoshiService {
     List<Map<String,String>> getAllJiaoshi();
+    List<Map<String,String>> getJiaoshiXingmingByXuexiaoId(int xuexiao_id);
     int insertJiaoshi(Jiaoshi jiaoshi);
     int deleteSingleJiaoshi(int jiaoshi_id);
     int updateSingleJiaoshi(Jiaoshi jiaoshi);

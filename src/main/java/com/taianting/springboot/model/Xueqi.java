@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -13,7 +15,9 @@ import java.io.Serializable;
 @Data
 @Log
 @Component
+@Entity
 public class Xueqi implements Serializable {
+    @Id
     private Integer xueqi_id;
     private String xueqi_mingcheng;
     private Integer xueqi_state;
@@ -25,7 +29,8 @@ public class Xueqi implements Serializable {
         this.xueqi_mingcheng = xueqi_mingcheng;
     }
 
-    public Xueqi(int xueqi_id, String xueqi_mingcheng) {
+    public Xueqi(int xueqi_id,
+                 String xueqi_mingcheng) {
         this.xueqi_id = xueqi_id;
         this.xueqi_mingcheng = xueqi_mingcheng;
     }
